@@ -3,8 +3,8 @@
 import './auth/user.js';
 // Part A: import create todo
 // Part B: import get todos
-import { createTodo, getTodos } from './fetch-utils.js';
 // Part C: import complete todos
+import { createTodo, getTodos, completeTodo } from './fetch-utils.js';
 // Part D: import delete all function
 import { renderTodo } from './render-utils.js';
 
@@ -98,5 +98,18 @@ function displayTodos() {
         //          - find the index of todo in todos
         //          - update that index of todos with the response data
         //          - redisplay the todos
+
+        todoEl.addEventListener('click', async () => {
+            const response = await completeTodo(todo.id);
+            error = response.error;
+            const updatedTodo = response.data;
+            if (error) {
+                displayError();
+            } else {
+                const index = todos.indexOf(todo);
+                todos[index] = updatedTodo;
+                displayTodos();
+            }
+        });
     }
 }
