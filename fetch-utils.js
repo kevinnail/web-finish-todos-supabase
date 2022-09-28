@@ -31,7 +31,6 @@ export async function signOutUser() {
 
 export async function createTodo(todo) {
     // > Part A: Insert the todo in supabase, returns a single row
-    console.log('todo from createTodo: ' + todo);
     return await client.from('todos').insert(todo).single();
 }
 
